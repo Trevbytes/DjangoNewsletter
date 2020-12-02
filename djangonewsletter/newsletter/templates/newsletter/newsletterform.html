@@ -44,7 +44,7 @@
 
     {% block page_header %}
     <header>
-      <div class="container">
+      <div class="container stylish-color text-white">
         <div class="row">
             <div class="col-10">
                 <h1>Newsletter Signup</h1>
@@ -58,7 +58,7 @@
     {% endblock %} 
 
     {% block content %}
-    <div class="container">
+    <div class="container pt-1">
       <div class="row">
         <div class="col text-center">
           <p>
@@ -77,15 +77,13 @@
               </button>
             </div>
           </form>
-            <!-- Collapse buttons -->
-            <div>
+          <div>
             <button class="btn btn-primary rounded font-weight-bold btn-sm" type="button" data-toggle="collapse" data-target="#removeEmail"
                 aria-expanded="false" aria-controls="collapseExample">
                 Unsubscribe Form
             </button>
-            </div>
-            <!-- / Collapse buttons -->         
-          <form class="collapse" action="{% url 'newsletter' %}" method="POST" id="removeEmail">
+          </div>       
+          <form class="collapse pt-2" action="{% url 'unsubscribe' %}" method="POST" id="removeEmail">
             {% csrf_token %}
             <fieldset>
               {{ request_form.full_name | as_crispy_field }}
