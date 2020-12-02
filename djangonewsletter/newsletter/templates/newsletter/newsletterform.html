@@ -1,0 +1,109 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% block meta %}
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    {% endblock %}
+    {% block corecss %}
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+    />
+    <!-- Bootstrap core CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css"
+    />
+    <!-- Material Design Bootstrap -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.0/css/mdb.min.css"
+    />
+    {% endblock %} 
+    {% block corejs %}
+    <!-- JQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.0/js/mdb.min.js"></script>
+    {% endblock %}
+
+    <title>Django Newsletter {% block extra_title %}{% endblock %}</title>
+  </head>
+  <body>
+
+    {% block page_header %}
+    <header>
+      <div class="container">
+        <div class="row">
+            <div class="col-10">
+                <h1>Newsletter Signup</h1>
+            </div>
+            <nav class="col-2 text-right y-auto">
+                <a href="{% url 'admin:index' %}">Admin</a>
+            </nav>
+        </div> 
+      </div> 
+    </header>
+    {% endblock %} 
+
+    {% block content %}
+    <div class="container">
+      <div class="row">
+        <div class="col text-center">
+          <p>
+            Please fill out the form below to Signup for our Newsletter.
+          </p>
+          <form action="{% url 'newsletter' %}" method="POST" id="request-form">
+            {% csrf_token %}
+            <fieldset>
+              {{ request_form.full_name | as_crispy_field }}
+              {{ request_form.email | as_crispy_field }} 
+              {{ request_form.postcode | as_crispy_field }}
+            </fieldset>
+            <div class="submit-button text-center mb-2">
+              <button id="submit-button" class="btn btn-primary rounded font-weight-bold">
+                Subscribe
+              </button>
+            </div>
+          </form>
+            <!-- Collapse buttons -->
+            <div>
+            <button class="btn btn-primary rounded font-weight-bold btn-sm" type="button" data-toggle="collapse" data-target="#removeEmail"
+                aria-expanded="false" aria-controls="collapseExample">
+                Unsubscribe Form
+            </button>
+            </div>
+            <!-- / Collapse buttons -->         
+          <form class="collapse" action="{% url 'newsletter' %}" method="POST" id="removeEmail">
+            {% csrf_token %}
+            <fieldset>
+              {{ request_form.full_name | as_crispy_field }}
+              {{ request_form.email | as_crispy_field }} 
+              {{ request_form.postcode | as_crispy_field }}
+            </fieldset>
+            <div class="submit-button text-center mb-2">
+              <button id="submit-button2" class="btn btn-danger rounded font-weight-bold">
+                Unsubscribe
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    {% endblock %} 
+
+    {% block postloadjs %} 
+    {% endblock %}
+  </body>
+</html>
