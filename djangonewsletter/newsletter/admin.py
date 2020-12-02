@@ -5,6 +5,7 @@ from django.http import HttpResponse
 
 
 class ExportCsvMixin:
+    """Code to write data as a CSV file"""
     def export_as_csv(self, request, queryset):
 
         meta = self.model._meta
@@ -24,13 +25,11 @@ class ExportCsvMixin:
 
 
 class NewsletterAdmin(admin.ModelAdmin, ExportCsvMixin):
-
+    """An admin class taging relevent data and allowing
+    the data to be exported as a CSV file."""
     fields = ('full_name', 'email', 'postcode',)
-
     list_display = ('full_name', 'email', 'postcode',)
-
     ordering = ('-full_name',)
-
     actions = ["export_as_csv"]
 
 
