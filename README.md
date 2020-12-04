@@ -34,11 +34,6 @@ For more infomation on how to clone or download the repository click [here](http
 
         cd djangonewsletter
 
-- Set up your Django SQLite3 database.
-
-        python3 manage.py makemigrations
-        python3 manage.py migrate
-
 - Create a Django super user.
 
         python3 manage.py createsuperuser
@@ -46,6 +41,11 @@ For more infomation on how to clone or download the repository click [here](http
 - You should then be able to launch your app using the following command in your terminal:
 
         python3 manage.py runserver
+
+- If your SQLite3 database is not working, confirm that there are no migrations to take care of.
+
+        python3 manage.py makemigrations
+        python3 manage.py migrate
 
 - Access the admin page from the 'Admin' link in the deployed project or add /admin to the URL. Login with your new super user account. 
 
